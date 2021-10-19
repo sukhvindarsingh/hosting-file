@@ -1,28 +1,18 @@
 import React, { useState } from "react";
 
-function About() {
-  const [myStyle, setMyStyle] = useState({
-    color: "black",
-    backgroundColor: "white",
-  });
-  const [btnText, setbtnText] = useState('Enable Light Mode')
-  const toggleStyle = () => {
-    if (myStyle.color === "black") {
-      setMyStyle({
-        color: "white",
-        backgroundColor: "black",
-      });
-      setbtnText('Enable Dark Mode')
-    }else{
-      setMyStyle({
-        color: "black",
-        backgroundColor: "white",
-      });
-      setbtnText('Enable Light Mode')
-    }
-  };
+function About(props) {
+  // const [myStyle, setMyStyle] = useState({
+  //   color: "black",
+  //   backgroundColor: "white",
+  // });
+  let myStyle ={
+    color: props.mode === 'dark'?'white':'#046a99',
+    backgroundColor: props.mode === 'dark'?'#046a99':'white',
+    border: '2px solid',
+    borderColor: props.mode === 'dark'?'white':'grey'
+  }
   return (
-    <div className="container" style={myStyle}>
+    <div className="container" style={{color: props.mode === 'dark'?'white':'#046a99'}}>
       <h1>About Us</h1>
       <div className="accordion" id="accordionExample">
         <div className="accordion-item">
@@ -36,7 +26,7 @@ function About() {
               aria-controls="collapseOne"
               style={myStyle}
             >
-              Accordion Item #1
+              <strong>Analyze Your Text</strong>
             </button>
           </h2>
           <div
@@ -68,7 +58,7 @@ function About() {
               aria-controls="collapseTwo"
               style={myStyle}
             >
-              Accordion Item #2
+              <strong>Free To Use</strong>
             </button>
           </h2>
           <div
@@ -100,7 +90,7 @@ function About() {
               aria-controls="collapseThree"
               style={myStyle}
             >
-              Accordion Item #3
+              <strong>Browser compatible</strong>
             </button>
           </h2>
           <div
@@ -121,15 +111,6 @@ function About() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="container">
-        <button
-          onClick={toggleStyle}
-          type="button"
-          className="btn btn-primary my-4"
-        >
-          {btnText}
-        </button>
       </div>
     </div>
   );
